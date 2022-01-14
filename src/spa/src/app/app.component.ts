@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
+import { WsService } from './ws.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,12 @@ export class AppComponent {
   
   items$: Observable<any[]>;
   
-  constructor(appService:AppService) {
+  constructor(
+    appService:AppService, 
+    wsService: WsService) {
     this.items$ = appService.WeatherForecast();
+    wsService.StartConnection();
+    wsService.RegisterOnServerEvents();
+
   }
 }
