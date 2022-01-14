@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    Hello World
+  <ul>
+  <li *ngFor="let item of items$ | async">
+    {{item | json}}
+  </li>
+  </ul>
   `,
   styles: []
 })
 export class AppComponent {
-  title = 'spa';
+  
+  items$: Observable<any[]>;
+  
+  constructor(appService:AppService) {
+    this.items$ = appService.WeatherForecast();
+  }
 }
