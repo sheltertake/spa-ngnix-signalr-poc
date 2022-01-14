@@ -22,4 +22,13 @@ services:
         # depends_on:
             # spm-accr-api-v1:
                 # condition: service_healthy
-            
+    api:
+        container_name: api
+        build:
+            context: ./src/api
+            dockerfile: ./Dockerfile
+        ports:
+            # - 9000:443
+            - 9002:80
+        networks:
+            - net
